@@ -1,0 +1,54 @@
+td, th{
+    text-align: center;
+    vertical-align: middle;
+}
+
+table, #reports{
+    width: 100%;
+    padding: none;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+span{
+    text-align: center;
+}
+
+.reportCardRedButton{ 
+    fill: #ff0000;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    stroke-width: 8;
+    stroke: black;
+}
+
+.reportCardRedButton:hover{ 
+    fill: #b30000;
+}
+
+.moreInfo{
+    text-decoration: underline;
+}
+
+.moreInfo:hover{
+    color: blue;
+    cursor:pointer ;
+}
+
+#locationHeader:hover{
+    cursor: pointer;
+}
+
+#suspectHeader:hover{
+    cursor: pointer;
+}
+
+#timeHeader:hover{
+    cursor: pointer;
+}
+
+#statusHeader:hover{
+    cursor: pointer;
+}

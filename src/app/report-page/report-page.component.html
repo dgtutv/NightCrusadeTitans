@@ -1,0 +1,30 @@
+<body>
+  <app-header></app-header>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <fieldset class="d-grid gap-2 col-12">
+      <input type="text" name="reporterName" placeholder="Reporter Name" formControlName="reporterName">
+      <div class="requiredText">*Required</div>
+      <input type="text" name="phoneNumber" placeholder="Reporter Phone Number" formControlName="phoneNumber">
+      <div class="requiredText">*Required, 10 numbers long, numbers only</div>
+      <input type="text" name="suspectName" placeholder="Name of The Suspect" formControlName="suspectName">
+      <div class="requiredText">*Required</div>
+      
+      
+      <div class="d-flex justify-content-between align-items-center">
+        <label for="locationName">Location:</label>
+        <button type="button" class="btn btn-primary btn-sm float-right" (click)="createNewLocation()">Create New Location</button>
+      </div>
+      <select id="locationName" placeholder="Location" formControlName="locationName">
+        <option *ngFor="let location of locations" [value]="location.name">{{location.name}}</option>
+      </select>
+      <div class="requiredText">*Required</div>
+      
+      <app-add-location (locationCreated)="onLocationCreated($event)" *ngIf="showAddLocationPopup"></app-add-location>
+
+
+      <input type="text" name="picture" placeholder="URL to image" formControlName="picture" style="margin-top: 8px;">
+      <input type="text" name="extraInfo" placeholder="Extra Information" formControlName="extraInfo">
+    </fieldset>
+    <button [disabled]="form.invalid">Submit</button>
+  </form>
+</body>

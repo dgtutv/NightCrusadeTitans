@@ -1,0 +1,40 @@
+<body>
+    <app-header></app-header>
+    <div id="blur">
+        <div id="mapContainer"><app-map></app-map></div>
+        <div id="reportList" class="scrollable-table"><app-report-list (moreInfoEvent)="moreInfo($event)" (editReportEvent)="editReport($event)"></app-report-list></div>
+    </div>  
+    <div id="overlay" *ngIf="currentReport != undefined" class="card">
+        <div class="d-flex justify-content-end">
+            <button id="closeButton" type="button" class="btn-close" aria-label="Close" (click)="closeOverlay()"></button>
+        </div>
+        <span><strong>Suspect Name:</strong>&nbsp;&nbsp;{{currentReport.suspectName}} </span>
+        <span><strong>Date Reported:</strong>&nbsp;&nbsp;{{currentReport.timeReported | date:'medium'}} </span>
+        <span><strong>Long-Lat:</strong>&nbsp;&nbsp;{{currentReport.longitude}}, {{currentReport.latitude}} </span>
+        <span><strong>Status:</strong>&nbsp;&nbsp;<span *ngIf="currentReport.resolved; then resolved else notResolved"></span></span>
+        <ng-template #resolved><span style="color: green;">Resolved</span></ng-template>
+        <ng-template #notResolved><span style="color: red;">Not Resolved</span></ng-template>
+        <span><strong>Reporter Name:</strong>&nbsp;&nbsp;{{currentReport.reporterName}} </span>
+        <span><strong>Reporter Phone:</strong>&nbsp;&nbsp;{{currentReport.phoneNumber | phoneNumber}} </span>
+        <span><strong>Report ID:</strong>&nbsp;&nbsp;{{currentReport.id}} </span>
+        <span *ngIf='currentReport.extraInfo then description'></span>
+        <ng-template #description><strong>Description:</strong><span id="description">&nbsp;&nbsp;{{currentReport.extraInfo}}</span></ng-template>
+        
+
+        <span *ngIf="currentReport.picture != null; then picture"></span>
+        <ng-template #picture> <strong> Picture:</strong> <img id="img" src="{{currentReport.picture}}"></ng-template>
+    </div>
+
+    <div id="editOverlay" *ngIf="currentReportEdit != undefined" class="card p-3">
+        <form (ngSubmit)="onSubmit()">
+            <label for="status" class="form-label me-2">Case Status:</label>
+            <div class="mb-3 d-flex justify-content-start align-items-center"> 
+                <select id="status" [(ngModel)]="currentReportEdit.resolved" name="status" class="form-select me-2">
+                    <option style="color: green;" value="true">Resolved</option>
+                    <option style="color: red;" value="false">Not Resolved</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>            
+        </form>
+    </div>
+</body>
